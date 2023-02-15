@@ -280,7 +280,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: startDate != null && endDate != null
-                                ? getIsItStartAndEndDate(date) || getIsInRange(date)
+                                ? getStartAndEndDate(date) || getRange(date)
                                     ? Theme.of(context).primaryColor.withOpacity(0.1)
                                     : Colors.transparent
                                 : Colors.transparent,
@@ -306,20 +306,20 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
                           final DateTime newminimumDate = DateTime(widget.minimumDate!.year, widget.minimumDate!.month, widget.minimumDate!.day - 1);
                           final DateTime newmaximumDate = DateTime(widget.maximumDate!.year, widget.maximumDate!.month, widget.maximumDate!.day + 1);
                           if (date.isAfter(newminimumDate) && date.isBefore(newmaximumDate)) {
-                            onDateClick(date);
+                            onChangeDateClick(date);
                           }
                         } else if (widget.minimumDate != null) {
                           final DateTime newminimumDate = DateTime(widget.minimumDate!.year, widget.minimumDate!.month, widget.minimumDate!.day - 1);
                           if (date.isAfter(newminimumDate)) {
-                            onDateClick(date);
+                            onChangeDateClick(date);
                           }
                         } else if (widget.maximumDate != null) {
                           final DateTime newmaximumDate = DateTime(widget.maximumDate!.year, widget.maximumDate!.month, widget.maximumDate!.day + 1);
                           if (date.isBefore(newmaximumDate)) {
-                            onDateClick(date);
+                            onChangeDateClick(date);
                           }
                         } else {
-                          onDateClick(date);
+                          onChangeDateClick(date);
                         }
                         // }
                       },
@@ -327,21 +327,21 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
                         padding: const EdgeInsets.all(2),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: getIsItStartAndEndDate(date) ? Theme.of(context).primaryColor : Colors.transparent,
+                            color: getStartAndEndDate(date) ? Theme.of(context).primaryColor : Colors.transparent,
                             shape: BoxShape.circle,
                           ),
                           child: Center(
                             child: Text(
                               '${date.day}',
                               style: TextStyle(
-                                  color: getIsItStartAndEndDate(date)
+                                  color: getStartAndEndDate(date)
                                       ? Colors.white
                                       : currentMonthDate.month == date.month
                                           ? widget.colorLabel
                                           : Colors.grey.withOpacity(0.6),
                                   fontSize: 13,
                                   fontFamily: widget.fontFamily,
-                                  fontWeight: getIsItStartAndEndDate(date) ? FontWeight.bold : FontWeight.normal),
+                                  fontWeight: getStartAndEndDate(date) ? FontWeight.bold : FontWeight.normal),
                             ),
                           ),
                         ),
@@ -357,7 +357,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
                       width: 6,
                       decoration: BoxDecoration(
                           color: DateTime.now().day == date.day && DateTime.now().month == date.month && DateTime.now().year == date.year
-                              ? getIsInRange(date)
+                              ? getRange(date)
                                   ? Colors.white
                                   : Theme.of(context).primaryColor
                               : Colors.transparent,
@@ -381,7 +381,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
     return daysInMonth;
   }
 
-  bool getIsInRange(DateTime date) {
+  bool getRange(DateTime date) {
     if (startDate != null && endDate != null) {
       if (date.isAfter(startDate!) && date.isBefore(endDate!)) {
         return true;
@@ -393,7 +393,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
     }
   }
 
-  bool getIsItStartAndEndDate(DateTime date) {
+  bool getStartAndEndDate(DateTime date) {
     if (startDate != null && startDate!.day == date.day && startDate!.month == date.month && startDate!.year == date.year) {
       return true;
     } else if (endDate != null && endDate!.day == date.day && endDate!.month == date.month && endDate!.year == date.year) {
@@ -423,7 +423,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
     }
   }
 
-  void onDateClick(DateTime date) {
+  void onChangeDateClick(DateTime date) {
     if (startDate == null) {
       startDate = date;
     } else if (startDate != date && endDate == null) {

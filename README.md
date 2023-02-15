@@ -42,6 +42,9 @@ The Flutter Custom Datetime Kh can customization include:
 For example, to create a button with white text, you could use the following code:
 
 ```dart
+DateTime? startDate = DateTime.now();
+DateTime? endDate = DateTime.now();
+
 PickUpDateTimeKh(
           header: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
