@@ -86,5 +86,5 @@ PickUpDateTimeKh(
           },
         ),
 ```
-<img src="https://github.com/chhumsovann/flutter_custom_datetime_kh/blob/main/sample_image/sample.jpg"  width="200"/>
+<img src="https://github.com/chhumsovann/pickup_datetime_kh/blob/main/sample_image/sample.jpg"  width="200"/>
 
