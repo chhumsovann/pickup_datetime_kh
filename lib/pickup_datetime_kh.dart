@@ -307,6 +307,8 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
                           final DateTime newmaximumDate = DateTime(widget.maximumDate!.year, widget.maximumDate!.month, widget.maximumDate!.day + 1);
                           if (date.isAfter(newminimumDate) && date.isBefore(newmaximumDate)) {
                             onChangeDateClick(date);
+                          } else {
+                            onChangeDateClick(date);
                           }
                         } else if (widget.minimumDate != null) {
                           final DateTime newminimumDate = DateTime(widget.minimumDate!.year, widget.minimumDate!.month, widget.minimumDate!.day - 1);
@@ -371,12 +373,14 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
         );
         count += 1;
       }
-      daysInMonth.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: listUI,
-      ));
+      daysInMonth.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: listUI,
+        ),
+      );
     }
     return daysInMonth;
   }
