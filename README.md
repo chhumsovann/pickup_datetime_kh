@@ -1,7 +1,8 @@
 # Pickup datetime kh library
 
 Pickup datetime kh is package let's you add pickup or choose datetime and custom
-Pickup datetime kh is opensource library developed by  <a href="https://kimsoer.site/">Voern Kimsoer</a>
+Pickup datetime kh is opensource library developed by <a href="https://kimsoer.site/">Voern Kimsoer</a> with <a href="https://www.youtube.com/channel/UCeOdLQeAytUW38kgLUbZ2BA">Vann Dev</a>
+
 
 ## Features
 
@@ -17,7 +18,7 @@ Pickup datetime kh is opensource library developed by  <a href="https://kimsoer.
 1. Add the latest version of package to your pubspec.yaml (and run`dart pub get`):
 ```yaml
 dependencies:
-  pickup_datetime_kh: ^0.0.3
+  pickup_datetime_kh: ^0.0.4
 ```
 2. Import the package and use it in your Flutter App.
 ```dart
@@ -36,6 +37,8 @@ The Flutter Custom Datetime Kh can customization include:
 - `btnRightBackgroundColor` : Background color for right button
 - `fontFamily` : Set font family
 - `radius` : Set radius
+- `setValueAuto` : Set value auto when disableButton = true
+- `disableButton` : for disable button
 
 
 ## Example
