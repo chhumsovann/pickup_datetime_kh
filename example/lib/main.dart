@@ -71,26 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          barrierDismissible: true,
           minimumDate: DateTime(2000),
           maximumDate: DateTime.now().add(const Duration(days: 30)),
           initialStartDate: startDate,
           initialEndDate: endDate,
-          btnLeftBackgroundColor: Colors.grey,
-          onApplyClick: (start, end) {
+          setValueAuto: (start, end) {
             setState(() {
               endDate = end;
               startDate = start;
             });
             print("Start Date $startDate");
             print("End Date $endDate");
-          },
-          btnRightBackgroundColor: Colors.blue,
-          onCancelClick: () {
-            setState(() {
-              endDate = DateTime.now();
-              startDate = DateTime.now();
-            });
           },
         ),
       ),

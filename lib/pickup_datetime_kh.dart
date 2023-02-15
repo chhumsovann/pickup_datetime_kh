@@ -8,15 +8,14 @@ class PickUpDateTimeKh extends StatefulWidget {
   final Color? backgroundColor;
   final DateTime minimumDate;
   final DateTime maximumDate;
-  final bool barrierDismissible;
   final DateTime? initialStartDate;
   final DateTime? initialEndDate;
-  final Function(DateTime, DateTime) onApplyClick;
-  final Function() onCancelClick;
+  final Function(DateTime, DateTime)? onApplyClick;
+  final Function()? onCancelClick;
   final double? radius;
   final List<BoxShadow>? boxShadow;
-  final Color btnRightBackgroundColor;
-  final Color btnLeftBackgroundColor;
+  final Color? btnRightBackgroundColor;
+  final Color? btnLeftBackgroundColor;
   final Color? btnLabelRightColor;
   final Color? btnLabelLeftColor;
   final String? btnLabelRight;
@@ -26,20 +25,21 @@ class PickUpDateTimeKh extends StatefulWidget {
   final Widget? leftIcon;
   final Widget? rightIcon;
   final Widget? header;
+  final bool? disableButton;
+  final Function(DateTime, DateTime)? setValueAuto; // this function is work when you set disableButton = true, first
   const PickUpDateTimeKh({
     Key? key,
     this.backgroundColor,
     required this.minimumDate,
     required this.maximumDate,
-    required this.barrierDismissible,
     this.initialStartDate,
     this.initialEndDate,
-    required this.onApplyClick,
-    required this.onCancelClick,
+    this.onApplyClick,
+    this.onCancelClick,
     this.radius,
     this.boxShadow,
-    required this.btnLeftBackgroundColor,
-    required this.btnRightBackgroundColor,
+    this.btnLeftBackgroundColor,
+    this.btnRightBackgroundColor,
     this.btnLabelRightColor,
     this.btnLabelLeftColor,
     this.colorLabel,
@@ -49,6 +49,8 @@ class PickUpDateTimeKh extends StatefulWidget {
     this.btnLabelRight,
     this.btnLabelLeft,
     this.header,
+    this.disableButton,
+    this.setValueAuto, // this function is work when you set disableButton = true, first
   }) : super(key: key);
 
   @override
@@ -87,40 +89,44 @@ class _PickUpDateTimeKhState extends State<PickUpDateTimeKh> {
                 startDate = startDateData;
                 endDate = endDateData;
               });
+              if (widget.disableButton ?? false) {
+                widget.setValueAuto!(startDate!, endDate!);
+              }
             },
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ArtButtonsKh(
-                    text: widget.btnLabelLeft ?? "Cancel",
-                    textColor: widget.btnLabelLeftColor,
-                    backgroundColor: widget.btnLeftBackgroundColor,
-                    onPressed: () {
-                      try {
-                        widget.onCancelClick();
-                      } catch (_) {}
-                    },
+          if (widget.disableButton != true)
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ArtButtonsKh(
+                      text: widget.btnLabelLeft ?? "Cancel",
+                      textColor: widget.btnLabelLeftColor,
+                      backgroundColor: widget.btnLeftBackgroundColor ?? Colors.black,
+                      onPressed: () {
+                        try {
+                          widget.onCancelClick!();
+                        } catch (_) {}
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: ArtButtonsKh(
-                    text: widget.btnLabelRight ?? 'Apply',
-                    textColor: widget.btnLabelRightColor,
-                    backgroundColor: widget.btnRightBackgroundColor,
-                    onPressed: () {
-                      try {
-                        widget.onApplyClick(startDate!, endDate!);
-                      } catch (_) {}
-                    },
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ArtButtonsKh(
+                      text: widget.btnLabelRight ?? 'Apply',
+                      textColor: widget.btnLabelRightColor,
+                      backgroundColor: widget.btnRightBackgroundColor ?? Theme.of(context).primaryColor,
+                      onPressed: () {
+                        try {
+                          widget.onApplyClick!(startDate!, endDate!);
+                        } catch (_) {}
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
+                ],
+              ),
+            )
         ],
       ),
     );
